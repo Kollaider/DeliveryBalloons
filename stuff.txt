@@ -1,0 +1,72 @@
+mkdir ~/DelieveryBalloons  
+cd ~/DelieveryBalloons
+python3 -m venv venv
+source venv/bin/activate
+pip3 install django gunicorn psycopg2-binary
+
+local
+git remote -v  
+on server
+git init
+git remote add origin https://github.com/Kollaider/DelieveryBalloons.git  
+git pull origin master  
+pip3 install -r requirements.txt
+
+sudo chmod -R 777 /ivan/DelieveryBalloons/ if permission denied
+
+~/DelieveryBalloons/manage.py makemigrations  
+~/DelieveryBalloons/manage.py migrate
+~/DelieveryBalloons/manage.py createsuperuser admin:adminpas  
+~/DelieveryBalloons/manage.py collectstatic  
+
+sudo ufw allow 8000  ****
+~/DelieveryBalloons/manage.py runserver 0.0.0.0:8000
+
+check in browser
+<http://167.99.244.218:8000>
+<http://68.183.219.9:8000>
+
+gunicorn --bind 0.0.0.0:8000 DelieveryBalloons.wsgi
+
+deactivate
+
+
+
+### /etc/systemd/system/gunicorn.socket
+
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+
+
+### /etc/systemd/system/gunicorn.service
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ivan
+Group=www-data
+WorkingDirectory=/home/ivan/DelieveryBalloons
+ExecStart=/home/ivan/DelieveryBalloons/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          DelieveryBalloons.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+
+sudo nano /etc/nginx/sites-available/DelieveryBalloons
+
+
+sudo ln -s /etc/nginx/sites-available/DelieveryBalloons /etc/nginx/sites-enabled
+sudo nginx -t
+sudo tail -f /var/log/nginx/error.log  # if failed

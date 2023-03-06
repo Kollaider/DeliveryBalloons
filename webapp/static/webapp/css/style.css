@@ -5948,32 +5948,32 @@ mark {
 }
 
 .slide-1 {
-  background-image: url("../images/slider/1-1.jpg' %}");
+  background-image: url("../images/slider/1-1.jpg");
   background-color: rgba(215, 177, 190, 0.9);
 }
 
 .slide-2 {
-  background-image: url("../images/slider/1-2.jpg' %}");
+  background-image: url("../images/slider/1-2.jpg");
   background-color: rgba(215, 177, 190, 0.9);
 }
 
 .slide-3 {
-  background-image: url("../images/slider/2-1.jpg' %}");
+  background-image: url("../images/slider/2-1.jpg");
   background-color: rgba(215, 177, 190, 0.9);
 }
 
 .slide-4 {
-  background-image: url("../images/slider/2-2.jpg' %}");
+  background-image: url("../images/slider/2-2.jpg");
   background-color: rgba(215, 177, 190, 0.9);
 }
 
 .slide-5 {
-  background-image: url("../images/slider/3-1.jpg' %}");
+  background-image: url("../images/slider/3-1.jpg");
   background-color: rgba(54, 36, 42, 0.9);
 }
 
 .slide-6 {
-  background-image: url("../images/slider/3-2.jpg' %}");
+  background-image: url("../images/slider/3-2.jpg");
   background-color: rgba(54, 36, 42, 0.9);
 }
 
@@ -7191,7 +7191,7 @@ mark {
 /*----------------------------------------*/
 .breadcrumbs-area {
   padding: 100px 0;
-  background: #f6f6f6 url(../images/bg/breadcrumb.jpg) no-repeat scroll center center/cover;
+  background: #f6f6f6 url(../images/bg/br.jpg) no-repeat scroll center center/cover;
 }
 
 .breadcrumbs-area:before {
