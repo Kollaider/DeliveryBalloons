@@ -140,4 +140,7 @@ STRIPE_SECRET_KEY_TEST = os.environ.get('STRIPE_SECRET_KEY_TEST')
 STRIPE_WEBHOOK_SECRET_TEST = os.environ.get('STRIPE_WEBHOOK_SECRET_TEST')
 PRODUCT_PRICE = os.environ.get('PRODUCT_PRICE')
 
-REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
+if DEBUG:
+    REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
+else:
+    REDIRECT_DOMAIN = 'https://kalilaskallc.com'
