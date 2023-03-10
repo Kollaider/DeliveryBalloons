@@ -12,8 +12,4 @@ urlpatterns = [
     path('payment_successful/', payment_successful, name='payment_successful'),
     path('payment_cancelled/', payment_cancelled, name='payment_cancelled'),
     path('stripe_webhook', stripe_webhook, name='stripe_webhook'),
-
-    path('signup', user_signup, name='signup'),
-    path('login', user_login, name='login'),
-    path('logout', user_logout, name='logout'),
 ]

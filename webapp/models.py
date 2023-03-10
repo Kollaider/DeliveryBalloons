@@ -27,7 +27,7 @@ class Product(CreateTimeMixin, UpdateTimeMixin, models.Model):
     """Product Model"""
 
     name = models.CharField(max_length=50)
-    price = models.PositiveIntegerField()
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField()
     image = models.ImageField(upload_to='product', null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True, blank=True)
