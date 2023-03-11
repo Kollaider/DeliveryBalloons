@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.views.generic import DetailView, TemplateView
 
 from webapp.models import Product
@@ -40,6 +42,7 @@ def product_detail(request, pk):
 
     stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
     if request.method == 'POST':
+        quantity = int(request.POST.get('quantity'))
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -51,7 +54,7 @@ def product_detail(request, pk):
                             'name': product.name,
                         },
                     },
-                    'quantity': int(request.POST.get('quantity')),
+                    'quantity': quantity,
                 },
             ],
             mode='payment',
@@ -64,6 +67,9 @@ def product_detail(request, pk):
             },
             allow_promotion_codes=True,
             billing_address_collection="required",
+            phone_number_collection={
+                'enabled': True,
+            },
 
             payment_intent_data={
                 'metadata': {
@@ -87,7 +93,14 @@ def product_detail(request, pk):
                     },
                 },
             ],
-
+            metadata={
+                "product_id": pk,
+                "quantity": quantity
+            }
+        )
+        UserPayment.objects.create(
+            stripe_checkout_id=checkout_session.stripe_id,
+            product_id=pk
         )
         return redirect(checkout_session.url, code=303)
 
@@ -99,11 +112,18 @@ def payment_successful(request):
     checkout_session_id = request.GET.get('session_id', None)
     session = stripe.checkout.Session.retrieve(checkout_session_id)
     customer = stripe.Customer.retrieve(session.customer)
-    # user_id = request.user.user_id
-    # user_id = 1
-    # user_payment = UserPayment.objects.get(app_user=user_id)
-    # user_payment.stripe_checkout_id = checkout_session_id
-    # user_payment.save()
+
+    user_payment = UserPayment.objects.get(stripe_checkout_id=checkout_session_id)
+    user_payment.is_paid = True
+    user_payment.email = session.customer_details.email
+    user_payment.phone = session.customer_details.phone
+    user_payment.comment = session.custom_fields[0].text['value']
+    user_payment.delivery_time = datetime.strptime(session.custom_fields[1].dropdown['value'], '%Y%m%dT%H%M%S')
+    address = session.shipping_details.address
+    user_payment.address = f'{address.line1}, {address.line2}, {address.city}, {address.postal_code}'
+    user_payment.quantity = int(session.metadata.quantity)
+    user_payment.save()
+
     return render(request, 'webapp/payment_successful.html', {'customer': customer})
 
 

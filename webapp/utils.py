@@ -1,19 +1,26 @@
-from datetime import datetime, timedelta
+import datetime
 
 
 def get_times_intervals():
-    # Set the start date and time to now
-    start_time = datetime.now()
 
-    # Set the end date to 3 days from now
-    end_time = start_time + timedelta(days=3)
+    time_intervals = list()
 
-    # Generate time intervals every hour between start_time and end_time
-    time_intervals = []
-    while start_time < end_time:
-        # Remove the minutes and seconds components
-        start_time = start_time.replace(minute=0, second=0, microsecond=0)
-        time_intervals.append(start_time)
-        start_time += timedelta(hours=1)
+    start_time = datetime.time(9, 0)  # Start time: 9:00 AM
+    end_time = datetime.time(20, 0)  # End time: 8:00 PM
 
-    return  [{'label': t.strftime("%Y-%m-%d %H:%M"), 'value': i} for i, t in enumerate(time_intervals, 1)]
+    delta = datetime.timedelta(hours=1)
+    current_date = datetime.date.today()
+
+    for day in range(3):
+        current_time = datetime.datetime.combine(current_date, start_time)  # Initialize current time for the day
+        while current_time.time() <= end_time:
+            time_intervals.append(current_time) # Output current time
+            current_time += delta  # Increment current time by the time interval
+        current_date += datetime.timedelta(days=1)
+
+    return  [{'label': t.strftime("%m/%d/%Y %I:%M %p"), 'value': t.strftime("%Y%m%dT%H%M%S")} for i, t in enumerate(time_intervals, 1)]
+
+
+if __name__ == '__main__':
+    print(get_times_intervals())
+

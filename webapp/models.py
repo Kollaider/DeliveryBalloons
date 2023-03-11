@@ -54,9 +54,15 @@ class Category(models.Model):
 
 
 class UserPayment(models.Model):
-    # app_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    payment_bool = models.BooleanField(default=False)
     stripe_checkout_id = models.CharField(max_length=500)
+    is_paid = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)
+    email = models.EmailField(null=True, blank=True)
+    comment = models.CharField(max_length=100, null=True, blank=True)
+    address = models.TextField()
+    delivery_time = models.DateTimeField(null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    quantity = models.IntegerField(blank=True, null=True)
 
 
 @receiver(post_save, sender=User)
