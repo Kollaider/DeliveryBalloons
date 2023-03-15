@@ -1606,6 +1606,11 @@ mark {
   color: #ffffff;
 }
 
+.instagram-color-bg:hover {
+  background-color: #ffffff;
+  color: #E72463;
+}
+
 .vimeo-color-bg {
   background-color: #86c9ef;
   color: #ffffff;

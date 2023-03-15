@@ -69,3 +69,15 @@ class UserPayment(models.Model):
 def create_user_payment(sender, instance, created, **kwargs):
     if created:
         UserPayment.objects.create(app_user=instance)
+
+
+
+class Banner(models.Model):
+    title = models.CharField(max_length=300)
+    image = models.ImageField(upload_to='banner', help_text='Image resolution should be 1920x896 pixels')
+
+
+
+class Content(models.Model):
+    name = models.CharField(max_length=300, editable=False, help_text='Image resolution should be 600х600 pixels')
+    text = models.TextField()

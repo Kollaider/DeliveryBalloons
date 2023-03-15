@@ -82,10 +82,6 @@
 {#                                </a>#}
 {#                            </li>#}
 {#                            <li>#}
-{#                                <a {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}#}
-{#                                   href="{% url 'contact' %}">#}
-{#                                    <span class="menu-text">Contact Us</span>#}
-{#                                </a>#}
                             </li>
                         </ul>
                     </nav>
@@ -126,12 +122,12 @@
                 <i class="fa fa-times"></i>
             </div>
             <div class="off-canvas-inner">
-                <div class="search-box-offcanvas">
-                    <form>
-                        <input type="text" placeholder="Search product...">
-                        <button class="search-btn"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
+{#                <div class="search-box-offcanvas">#}
+{#                    <form>#}
+{#                        <input type="text" placeholder="Search product...">#}
+{#                        <button class="search-btn"><i class="fa fa-search"></i></button>#}
+{#                    </form>#}
+{#                </div>#}
                 <!-- mobile menu start -->
                 <div class="mobile-navigation">
                     <!-- mobile menu navigation start -->
@@ -144,11 +140,11 @@
 
                             </li>
 
-                            <li>
-                                <a href="{% url 'about' %}">
-                                    <span class="menu-text"> About Us</span>
-                                </a>
-                            </li>
+{#                            <li>#}
+{#                                <a href="{% url 'about' %}">#}
+{#                                    <span class="menu-text"> About Us</span>#}
+{#                                </a>#}
+{#                            </li>#}
                             <li>
                                 <a href="{% url 'contact' %}">
                                     <span class="menu-text">Contact Us</span>
@@ -163,22 +159,17 @@
 
                     <div class="top-info-wrap text-left text-black">
                         <ul class="address-info">
-                            <li>
-                                <i class="fa fa-phone"></i>
-                                <a href="info@yourdomain.com">(1245) 2456 012</a>
-                            </li>
+{#                            <li>#}
+{#                                <i class="fa fa-phone"></i>#}
+{#                                <a href="info@yourdomain.com">(1245) 2456 012</a>#}
+{#                            </li>#}
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                <a href="info@yourdomain.com">info@yourdomain.com</a>
+                                <a href="mailto:delieveryballoons@gmail.com">delieveryballoons@gmail.com</a>
                             </li>
                         </ul>
                         <div class="widget-social">
-                            <a class="facebook-color-bg" title="Facebook-f" href="#"><i
-                                    class="fa fa-facebook-f"></i></a>
-                            <a class="twitter-color-bg" title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
-                            <a class="linkedin-color-bg" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                            <a class="vimeo-color-bg" title="Vimeo" href="#"><i class="fa fa-instagram"></i></a>
-                            <a class="vimeo-color-bg" title="Instagram" href="https://www.instagram.com/kalilaska_balloons/"><i class="fa fa-instagram"></i></a>
+                            <a class="instagram-color-bg" title="Instagram" href="https://www.instagram.com/kalilaska_balloons/"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -199,17 +190,7 @@
                     <ul class="menu-top-menu">
                         <li><a href="{% url 'about' %}">About Us</a></li>
                     </ul>
-                    <p class="desc-content">Welcome to Balloon Delivery shop, the one-stop-shop for all your balloon
-                        needs!
-                        We are dedicated to bringing the fun and excitement of balloons to your events, big or small.
-                        From birthdays to weddings, graduations to corporate events, we have a wide variety of balloons
-                        to choose from. Our collection includes classic latex balloons, foil balloons in various shapes
-                        and sizes, balloon bouquets, and customized balloons to add a personal touch to your
-                        celebration. We also offer balloon accessories such as balloon weights, ribbons, and pumps to
-                        make decorating a breeze. Our balloons are made with high-quality materials and are designed to
-                        last longer than your typical party balloon. With our fast and reliable shipping, you can have
-                        your balloons delivered right to your doorstep in no time. Let us make your special occasion a
-                        memorable one with our wide selection of balloons at Balloon Delivery shop.
+                    <p class="desc-content">{{ content_about_us }}
                     </p>
                     <div class="switcher">
 
@@ -219,7 +200,7 @@
 
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                <a href="delieveryballoons@gmail.com">delieveryballoons@gmail.com</a>
+                                <a href="mailto:delieveryballoons@gmail.com">delieveryballoons@gmail.com</a>
                             </li>
                         </ul>
                         <div class="widget-social">

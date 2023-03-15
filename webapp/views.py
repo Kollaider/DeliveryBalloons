@@ -1,8 +1,9 @@
 from datetime import datetime
+from itertools import zip_longest
 
 from django.views.generic import DetailView, TemplateView
 
-from webapp.models import Product
+from webapp.models import Product, Content, Banner
 from webapp.utils import get_times_intervals
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -17,9 +18,13 @@ class HomePage(TemplateView):
     template_name = 'webapp/index.html'
 
     def get_context_data(self, **kwargs):
-        products = Product.objects.all()
         context = {}
-        context['products'] = products
+        products = Product.objects.all()
+        lst1, lst2 = [p1 for p1 in products[::2]], [p2 for p2 in products[1::2]]
+        context['products'] = zip_longest(lst1, lst2)
+        content_about_us = Content.objects.get(name='about_us').text
+        context['content_about_us'] = content_about_us
+        context['banners'] = Banner.objects.all()
         return super().get_context_data(**context)
 
 
@@ -100,7 +105,8 @@ def product_detail(request, pk):
         )
         UserPayment.objects.create(
             stripe_checkout_id=checkout_session.stripe_id,
-            product_id=pk
+            product_id=pk,
+            quantity=quantity
         )
         return redirect(checkout_session.url, code=303)
 

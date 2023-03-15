@@ -61,32 +61,40 @@
 
                         <p class="desc-content mb-5">{{ product.description }}</p>
 
-                        <form enctype="multipart/form-data" method="post" role="product_page">
+                    </div>
+                </div>
+
+                <div class="col-lg-7 col-custom">
+                    <div class="product-summery position-relative">
+         <form enctype="multipart/form-data" method="post" action="{% url 'product_detail' product.pk %}" role="product_page">
                             {% csrf_token %}
-                            <div class="quantity-with-btn">
+                            <div class="quantity-with_btn mb-5">
                                 <div class="quantity">
                                     <div class="cart-plus-minus">
-                                        <input name="quantity" class="cart-plus-minus-box" value="1" type="text">
+                                        <input name="quantity" class="cart-plus-minus-box" value="1" type="number">
                                         <div class="dec qtybutton">-</div>
                                         <div class="inc qtybutton">+</div>
-                                        <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
-                                        <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
                                     </div>
                                 </div>
-                                <div class="add-to_btn">
-                                    <button class="btn flosun-button secondary-btn rounded-0"
-                                            href="{% url 'product_detail' product.pk %}" data-bind-href="pricing">
-                                        Payment
-                                    </button>
+                                <div class="add-to_cart">
+                                    <button class="btn flosun-button secondary-btn secondary-border rounded-0"
+                                       href="{% url 'product_detail' product.pk %}" data-bind-href="pricing">Payment</button>
                                 </div>
+
                             </div>
                         </form>
 
-
+{##}
+{#                        <div class="social-share mb-4">#}
+{#                            <span>Share :</span>#}
+{#                            <a href="#"><i class="fa fa-instagram pinterest-color"></i></a>#}
+{#                        </div>#}
                     </div>
                 </div>
             </div>
+
         </div>
+    </div>
     </div>
 
 
