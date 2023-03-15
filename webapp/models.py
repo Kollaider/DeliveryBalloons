@@ -79,5 +79,5 @@ class Banner(models.Model):
 
 
 class Content(models.Model):
-    name = models.CharField(max_length=300, editable=False, help_text='Image resolution should be 600х600 pixels')
+    name = models.CharField(max_length=300, help_text='Image resolution should be 600х600 pixels')
     text = models.TextField()

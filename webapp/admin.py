@@ -23,3 +23,11 @@ class BannerAdmin(admin.ModelAdmin):
 @admin.register(Content)
 class ContentAdmin(admin.ModelAdmin):
     list_display = ['name']
+    fields = ['name', 'text']
+    readonly_fields = ('name',)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return self.fields
+        else:
+            return []
